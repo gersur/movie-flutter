@@ -1,17 +1,33 @@
-import 'package:flutter/material.dart';
 import 'package:movie_flutter/api/api.dart';
+import 'package:movie_flutter/states/states.dart';
 
-class StateMovies with ChangeNotifier {
+class StateMovies extends BaseState {
   MoviesNowPlaying? _nowPlaying;
   MoviesPopular? _popular;
   MoviesRecommendation? _recommendation;
 
-  MoviesNowPlaying? get nowPlaying => _nowPlaying;
-  MoviesPopular? get popular => _popular;
-  MoviesRecommendation? get recommendation => _recommendation;
+  Future<MoviesNowPlaying> nowPlaying(BuildContext context,
+      [bool refresh = false]) async {
+    if (refresh || _nowPlaying == null) {
+      _nowPlaying = await ProviderMovie.getNowPlaying(context);
+    }
+    return _nowPlaying!;
+  }
 
-  void increment() {
-    _count++;
-    notifyListeners();
+  Future<MoviesPopular> popular(BuildContext context,
+      [bool refresh = false]) async {
+    if (refresh || _nowPlaying == null) {
+      _popular = await ProviderMovie.getPopular(context);
+    }
+    return _popular!;
+  }
+
+  Future<MoviesRecommendation> recommendation(BuildContext context, int movieId,
+      [bool refresh = false]) async {
+    if (refresh || _nowPlaying == null) {
+      _recommendation =
+          await ProviderMovie.getRecommendations(context, movieId);
+    }
+    return _recommendation!;
   }
 }
