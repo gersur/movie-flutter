@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:movie_flutter/api/api.dart';
 import 'package:movie_flutter/states/states.dart';
 
@@ -5,6 +6,15 @@ class StateMovies extends BaseState {
   MoviesNowPlaying? _nowPlaying;
   MoviesPopular? _popular;
   MoviesRecommendation? _recommendation;
+
+  Future<void> init(BuildContext context) async {
+    await Future.wait([
+      nowPlaying(context),
+      popular(context),
+    ]);
+
+    setInitDone(true);
+  }
 
   Future<MoviesNowPlaying> nowPlaying(BuildContext context,
       [bool refresh = false]) async {

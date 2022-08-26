@@ -1,5 +1,6 @@
 import 'package:movie_flutter/pages/home.dart';
 import 'package:movie_flutter/states/states.dart';
+import 'package:flutter/material.dart';
 
 void main() {
   runApp(

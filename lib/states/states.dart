@@ -5,7 +5,6 @@ import 'package:provider/single_child_widget.dart';
 import './movies.dart';
 
 export 'package:provider/provider.dart';
-export 'package:flutter/material.dart';
 
 export './movies.dart';
 
@@ -15,29 +14,11 @@ abstract class BaseState with ChangeNotifier implements BaseStateInterface {
   @protected
   void setInitDone(bool initDone) {
     _initDone = initDone;
-  }
-
-  @override
-  @mustCallSuper
-  Future<void> init(BuildContext context) async {
-    if (!_initDone) {
-      _initDone = true;
-
-      notifyListeners();
-    }
-  }
-
-  @override
-  @mustCallSuper
-  void uninit() {
-    _initDone = false;
+    notifyListeners();
   }
 }
 
-abstract class BaseStateInterface {
-  Future<void> init(BuildContext context);
-  void uninit();
-}
+abstract class BaseStateInterface {}
 
 class States {
   static List<SingleChildStatelessWidget> providers = [

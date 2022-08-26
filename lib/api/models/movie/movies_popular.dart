@@ -43,7 +43,7 @@ class MoviesPopularResults {
   String? releaseDate;
   String? title;
   bool? video;
-  double? voteAverage;
+  int? voteAverage;
   int? voteCount;
 
   MoviesPopularResults(
